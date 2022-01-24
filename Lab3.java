@@ -9,58 +9,60 @@ class Loan {
     private Date loanDate = new Date(System.currentTimeMillis());
 
     public Loan(double i, int period, double principal){
-        annualInterestRate = i;
-        numberOfYears = period;
-        loanAmount = principal;
-        loanDate = new Date(System.currentTimeMillis());
+        this.annualInterestRate = i;
+        this.numberOfYears = period;
+        this.loanAmount = principal;
+        this.loanDate = new Date(System.currentTimeMillis());
     }
 
     public Loan(){
-        annualInterestRate = 2.5;
-        numberOfYears = 1;
-        loanAmount = 1000;
-        loanDate = new Date(System.currentTimeMillis());
+        this.annualInterestRate = 2.5;
+        this.numberOfYears = 1;
+        this.loanAmount = 1000;
+        this.loanDate = new Date(System.currentTimeMillis());
     }
 
     public double getAnnualInterestRate(){
-        return annualInterestRate;
+        return this.annualInterestRate;
     }
 
     public int getNumberOfYears(){
-        return numberOfYears;
+        return this.numberOfYears;
     }
 
     public double getLoanAmount(){
-        return loanAmount;
+        return this.loanAmount;
     }
 
     public Date getLoanDate(){
-        return loanDate;
+        return this.loanDate;
     }
 
     public void setAnnualInterestRate(double i){
-        annualInterestRate = i; 
+        this.annualInterestRate = i; 
     }
 
     public void setNumberOfYears(int i){
-        numberOfYears = i;
+        this.numberOfYears = i;
     }
 
     public void setLoanAmount(double i){
-        loanAmount = i;
+        this.loanAmount = i;
     }
 
     public double getMonthlyPayment(){
-        double n = loanAmount*(annualInterestRate/100/12);
-        double d = 1 - Math.pow(Math.pow(1+annualInterestRate/100/12, numberOfYears*12),-1);
+        double n = this.loanAmount*(this.annualInterestRate/100/12);
+        double d = 1 - Math.pow(Math.pow(1+this.annualInterestRate/100/12, this.numberOfYears*12),-1);
         return n/d;
     }
 
     public double getTotalPayment(){
-        double ans = getMonthlyPayment() * numberOfYears * 12;
+        double ans = getMonthlyPayment() * this.numberOfYears * 12;
         return ans;
     }
+}
 
+class Main {
     public static void main(String[] args){
         Scanner input = new Scanner(System.in);
         System.out.print("Enter annual interest rate, for example, 8.25: ");
@@ -74,7 +76,7 @@ class Loan {
         Loan loan = new Loan(i, n, p);
 
         SimpleDateFormat formatter = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy");
-        System.out.println("The loan was created on " + formatter.format(loan.loanDate));
+        System.out.println("The loan was created on " + formatter.format(loan.getLoanDate()));
         System.out.println("The monthly payment is " + String.format("%.2f",loan.getMonthlyPayment()));
         System.out.println("The total payment is " + String.format("%.2f",loan.getTotalPayment()));
     }
